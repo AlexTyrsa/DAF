@@ -9,6 +9,10 @@ find_package(Qt6 6.2 COMPONENTS Quick REQUIRED)
 
 qt_add_executable(appDAF
     main.cpp
+    data/QDataI.h
+    data/QDataI.cpp
+    data/QDataDevicesI.h
+    data/QDataDevicesI.cpp
 )
 
 qt_add_qml_module(appDAF
@@ -25,7 +29,9 @@ set_target_properties(appDAF PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-target_compile_definitions(appDAF
-    PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
+target_compile_definitions(appDAF PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
+find_package(Qt6 REQUIRED COMPONENTS Multimedia)
 target_link_libraries(appDAF
-    PRIVATE Qt6::Quick)
+    PRIVATE Qt6::Quick
+            Qt6::Multimedia
+)
