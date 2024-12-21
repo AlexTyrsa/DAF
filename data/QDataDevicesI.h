@@ -13,12 +13,15 @@ class QDataDevicesI: public QObject
 public:
     Q_PROPERTY(QQmlListProperty<const QAudioDevice> devices READ devicesList NOTIFY devicesChanged)
     Q_PROPERTY(QAudioDevice selectedDevice READ selectedDevice NOTIFY selectedDeviceChanged)
+    Q_PROPERTY(QAudioDevice defaultDevice READ defaultDevice NOTIFY defaultDeviceChanged)
 
 public:
     QDataDevicesI(QObject* inParent = nullptr);
 
     virtual QAudioDevice selectedDevice() const = 0;
     virtual Q_INVOKABLE void setSelectedDevice(const QByteArray& inId) = 0;
+
+    virtual QAudioDevice defaultDevice() const = 0;
 
     virtual const QList<QAudioDevice>& devices() const = 0;
     virtual void setDevices(const QList<QAudioDevice>& inDevices) = 0;
@@ -27,6 +30,7 @@ public:
 
 signals:
     void selectedDeviceChanged(QAudioDevice);
+    void defaultDeviceChanged(QAudioDevice);
     void devicesChanged();
 
 public:

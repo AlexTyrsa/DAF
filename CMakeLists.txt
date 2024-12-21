@@ -13,6 +13,10 @@ qt_add_executable(appDAF
     data/QDataI.cpp
     data/QDataDevicesI.h
     data/QDataDevicesI.cpp
+    data/QDataDAF.h
+    data/QDataDAF.cpp
+    data/QDataDevicesDAF.h
+    data/QDataDevicesDAF.cpp
     view/QViewI.h
     view/QViewI.cpp
     view/QViewDevicesI.h

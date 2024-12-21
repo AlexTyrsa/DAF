@@ -9,8 +9,8 @@ class QDataI : public QObject
     Q_OBJECT
 
 public:
-    Q_PROPERTY(int delaySamples READ delaySamples WRITE setDelaySamples NOTIFY delaySamplesChanged)
-    Q_PROPERTY(int delayMS READ delayMS WRITE setDelayMS NOTIFY delayMSChanged)
+    Q_PROPERTY(int delaySamples READ delaySamples WRITE setDelaySamples NOTIFY delayChanged)
+    Q_PROPERTY(int delayMS READ delayMS WRITE setDelayMS NOTIFY delayChanged)
 
     Q_PROPERTY(QAudioFormat selectedFormat READ selectedFormat NOTIFY selectedFormatChanged)
 
@@ -33,8 +33,7 @@ public slots:
     virtual void setDelayMS(int inDelay) = 0;
 
 signals:
-    void delaySamplesChanged(int);
-    void delayMSChanged(int);
+    void delayChanged();
     void selectedFormatChanged(QAudioFormat);
     void inputChanged(QDataDevicesI*);
     void outputChanged(QDataDevicesI*);
