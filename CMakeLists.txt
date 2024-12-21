@@ -13,12 +13,18 @@ qt_add_executable(appDAF
     data/QDataI.cpp
     data/QDataDevicesI.h
     data/QDataDevicesI.cpp
+    view/QViewI.h
+    view/QViewI.cpp
+    view/QViewDevicesI.h
+    view/QViewDevicesI.cpp
 )
 
 qt_add_qml_module(appDAF
     URI DAF
     VERSION 1.0
-    QML_FILES main.qml 
+    QML_FILES main.qml
+              view/QCViewItem.qml
+              view/QCViewDevicesItem.qml
 )
 
 set_target_properties(appDAF PROPERTIES
