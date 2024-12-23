@@ -9,6 +9,19 @@ QDataDAF::QDataDAF(QObject *inParent) : QDataI(inParent), mDelaySamples(0)
     mIODevice = new QBuffer(this);
     mInputs   = new QDataDevicesDAF(mIODevice, this);
     mOutputs  = new QDataDevicesDAF(mIODevice, this);
+
+
+    QAudioFormat selectedFormat;
+
+    selectedFormat.setSampleRate(48000);
+    selectedFormat.setSampleFormat(QAudioFormat::Int16);
+    selectedFormat.setChannelCount(1);
+
+    mInputs->setSelectedFormat(selectedFormat);
+
+    selectedFormat.setChannelCount(2);
+
+    mOutputs->setSelectedFormat(selectedFormat);
 }
 
 int QDataDAF::delaySamples() const
@@ -48,7 +61,7 @@ void QDataDAF::setDelaySamples(int inDelay)
 
 void QDataDAF::setDelayMS(int inDelay)
 {
-    int delaySamples = selectedFormat().framesForDuration(inDelay * 1000);
+    int delaySamples = selectedFormat().framesForDuration(inDelay * 1000) / selectedFormat().channelCount();
 
     setDelaySamples(delaySamples);
 }

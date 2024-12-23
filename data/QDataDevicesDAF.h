@@ -14,6 +14,9 @@ public:
 
     QAudioDevice defaultDevice() const override;
 
+    QAudioFormat selectedFormat() const override;
+    void setSelectedFormat(const QAudioFormat& inFormat) override;
+
     const QList<QAudioDevice>& devices() const override;
     void setDevices(const QList<QAudioDevice>& inDevices) override;
 
@@ -23,5 +26,7 @@ private:
     QList<QAudioDevice> mDevices;
     QByteArray mSelectedDeviceId;
     QIODevice* mIODevice;
+
+    QAudioFormat mSelectedFormat;
 
 };

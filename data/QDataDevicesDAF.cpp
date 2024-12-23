@@ -43,6 +43,21 @@ QAudioDevice QDataDevicesDAF::defaultDevice() const
         return QAudioDevice();
 }
 
+QAudioFormat QDataDevicesDAF::selectedFormat() const
+{
+    return mSelectedFormat;
+}
+
+void QDataDevicesDAF::setSelectedFormat(const QAudioFormat &inFormat)
+{
+    if(inFormat != mSelectedFormat)
+    {
+        mSelectedFormat = inFormat;
+
+        emit selectedFormatChanged(mSelectedFormat);
+    }
+}
+
 const QList<QAudioDevice> &QDataDevicesDAF::devices() const
 {
     return mDevices;
@@ -50,11 +65,27 @@ const QList<QAudioDevice> &QDataDevicesDAF::devices() const
 
 void QDataDevicesDAF::setDevices(const QList<QAudioDevice> &inDevices)
 {
-    mDevices = inDevices;
+    QAudioDevice oldDefDevice = defaultDevice();
 
+    mDevices = inDevices;
     emit devicesChanged();
-    emit defaultDeviceChanged(defaultDevice());
-    emit selectedDeviceChanged(selectedDevice());
+
+    QAudioDevice defDevice = defaultDevice();
+    if(oldDefDevice != defDevice)
+        emit defaultDeviceChanged(defDevice);
+
+    QAudioDevice selDevice = selectedDevice();
+    if(selDevice.isNull())
+    {
+        if(!defDevice.isNull())
+            mSelectedDeviceId = defDevice.id();
+        else if(!inDevices.empty())
+            mSelectedDeviceId = inDevices[0].id();
+        else
+            mSelectedDeviceId.clear();
+
+        emit selectedDeviceChanged(selectedDevice());
+    }
 }
 
 QIODevice *QDataDevicesDAF::io() const

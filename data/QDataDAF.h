@@ -13,8 +13,6 @@ public:
     int delaySamples() const override;
     int delayMS() const override;
 
-    QAudioFormat selectedFormat() const override;
-
     QDataDevicesI* input() const override;
     QDataDevicesI* output() const override;
 
@@ -28,5 +26,4 @@ private:
     QDataDevicesI* mInputs;
     QDataDevicesI* mOutputs;
 
-    QAudioFormat mSelectedFormat;
 };
