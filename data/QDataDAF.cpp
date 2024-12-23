@@ -31,12 +31,7 @@ int QDataDAF::delaySamples() const
 
 int QDataDAF::delayMS() const
 {
-    return selectedFormat().durationForFrames(delaySamples()) / 1000;
-}
-
-QAudioFormat QDataDAF::selectedFormat() const
-{
-    return mSelectedFormat;
+    return input()->selectedFormat().durationForFrames(delaySamples()) / 1000;
 }
 
 QDataDevicesI *QDataDAF::input() const
@@ -61,7 +56,7 @@ void QDataDAF::setDelaySamples(int inDelay)
 
 void QDataDAF::setDelayMS(int inDelay)
 {
-    int delaySamples = selectedFormat().framesForDuration(inDelay * 1000) / selectedFormat().channelCount();
+    int delaySamples = input()->selectedFormat().framesForDuration(inDelay * 1000) / input()->selectedFormat().channelCount();
 
     setDelaySamples(delaySamples);
 }
