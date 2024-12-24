@@ -2,6 +2,8 @@
 
 #include "QDataI.h"
 
+#include "../sample_processor/QSampleProcessor.h"
+
 class QDataDAF : public QDataI
 {
     Q_OBJECT
@@ -21,9 +23,9 @@ public slots:
     void setDelayMS(int inDelay) override;
 
 private:
-    int mDelaySamples;
-    QIODevice * mIODevice;
-    QDataDevicesI* mInputs;
-    QDataDevicesI* mOutputs;
+    int               mDelaySamples;
+    QSampleProcessor* mIODevice;
+    QDataDevicesI*    mInputs;
+    QDataDevicesI*    mOutputs;
 
 };

@@ -17,6 +17,8 @@ qt_add_executable(appDAF
     data/QDataDAF.cpp
     data/QDataDevicesDAF.h
     data/QDataDevicesDAF.cpp
+    sample_processor/QSampleProcessor.h
+    sample_processor/QSampleProcessor.cpp
     view/QViewI.h
     view/QViewI.cpp
     view/QViewDevicesI.h

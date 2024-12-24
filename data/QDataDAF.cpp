@@ -2,11 +2,9 @@
 
 #include "QDataDevicesDAF.h"
 
-#include <QBuffer>
-
 QDataDAF::QDataDAF(QObject *inParent) : QDataI(inParent), mDelaySamples(0)
 {
-    mIODevice = new QBuffer(this);
+    mIODevice = new QSampleProcessor(this);
     mIODevice->open(QIODevice::ReadWrite);
     mInputs   = new QDataDevicesDAF(mIODevice, this);
     mOutputs  = new QDataDevicesDAF(mIODevice, this);
