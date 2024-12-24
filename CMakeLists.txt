@@ -27,6 +27,8 @@ qt_add_executable(appDAF
     view/audio/QViewRecorder.cpp
     view/audio/QViewPlayer.h
     view/audio/QViewPlayer.cpp
+    view/audio/QViewMediaDevices.h
+    view/audio/QViewMediaDevices.cpp
 )
 
 qt_add_qml_module(appDAF
