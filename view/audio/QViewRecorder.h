@@ -10,7 +10,7 @@ class QViewRecorder: public QViewAudio
     Q_OBJECT
 
 public:
-    QViewRecorder(QObject* inParent);
+    QViewRecorder(QObject* inParent = nullptr);
 
 private slots:
     void onAudioDataChanged();

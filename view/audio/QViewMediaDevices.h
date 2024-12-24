@@ -9,10 +9,10 @@ class QViewMediaDevices : public QViewI
     Q_OBJECT
 
 public:
-    QViewMediaDevices(QObject* inParent);
+    QViewMediaDevices(QObject* inParent = nullptr);
 
 private slots:
-    void onDataChange(QDataI* data);
+    void onDataChanged(QDataI* data);
     void onInputChanged(QDataDevicesI* inInput);
     void onOutputChanged(QDataDevicesI* inOutput);
     void onInputChanged();

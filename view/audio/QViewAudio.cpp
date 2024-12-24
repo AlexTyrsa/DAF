@@ -2,7 +2,7 @@
 
 QViewAudio::QViewAudio(QObject *inParent) : QViewDevicesI(inParent)
 {
-
+    QObject::connect(this, SIGNAL(dataChanged(QDataDevicesI*)), this, SLOT(onDataChanged(QDataDevicesI*)));
 }
 
 void QViewAudio::onDataChanged(QDataDevicesI *inData)

@@ -13,10 +13,10 @@ void QViewRecorder::onAudioDataChanged()
 
     if(dev_data)
     {
-        QAudioFormat format;
-        QAudioDevice info;
+        QAudioFormat format = dev_data->selectedFormat();
+        QAudioDevice info   = dev_data->selectedDevice();
 
-        if(format.isValid())
+        if(!format.isValid())
             qWarning() << "QViewRecorder::onAudioDataChanged, destroing QAudioSource due to QAudioFormat is invalid!";
         else if(info.isNull())
             qWarning() << "QViewRecorder::onAudioDataChanged, destroing QAudioSource due to QAudioDevice is empty!";

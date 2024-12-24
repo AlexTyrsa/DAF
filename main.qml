@@ -9,7 +9,8 @@ Window
     visible: true
     title: qsTr("DAF")
 
-    QCViewItem
+//    QCViewItem
+    Item
     {
         anchors.fill: parent
     }

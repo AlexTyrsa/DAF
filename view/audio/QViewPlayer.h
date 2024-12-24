@@ -10,7 +10,7 @@ class QViewPlayer: public QViewAudio
     Q_OBJECT
 
 public:
-    QViewPlayer(QObject* inParent);
+    QViewPlayer(QObject* inParent = nullptr);
 
 private slots:
     void onAudioDataChanged();

@@ -2,11 +2,12 @@
 
 QViewMediaDevices::QViewMediaDevices(QObject *inParent) : QViewI(inParent)
 {
+    QObject::connect(this, SIGNAL(dataChanged(QDataI*)), this, SLOT(onDataChanged(QDataI*)));
     QObject::connect(&mDevices, SIGNAL(audioInputsChanged()), this, SLOT(onInputChanged()));
     QObject::connect(&mDevices, SIGNAL(audioOutputsChanged()), this, SLOT(onOutputChanged()));
 }
 
-void QViewMediaDevices::onDataChange(QDataI *data)
+void QViewMediaDevices::onDataChanged(QDataI *data)
 {
     QObject::connect(data, SIGNAL(inputChanged(QDataDevicesI*)), this, SLOT(onInputChanged(QDataDevicesI*)));
     QObject::connect(data, SIGNAL(outputChanged(QDataDevicesI*)), this, SLOT(onOutputChanged(QDataDevicesI*)));
