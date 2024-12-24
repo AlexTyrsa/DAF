@@ -17,7 +17,7 @@ QDataDAF::QDataDAF(QObject *inParent) : QDataI(inParent), mDelaySamples(0)
 
     mInputs->setSelectedFormat(selectedFormat);
 
-    selectedFormat.setChannelCount(2);
+//    selectedFormat.setChannelCount(2);
 
     mOutputs->setSelectedFormat(selectedFormat);
 }

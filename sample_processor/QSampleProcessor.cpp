@@ -1,21 +1,27 @@
 #include "QSampleProcessor.h"
 
-QSampleProcessor::QSampleProcessor(QObject *inParent) : QIODevice(inParent)
+#include <QDebug>
+
+QSampleProcessor::QSampleProcessor(QObject *inParent) : QIODevice(inParent), buffer(1024, 0)
 {
 
 }
 
 qint64 QSampleProcessor::bytesAvailable() const
 {
-    return 0;
+    return buffer.size() + QIODevice::bytesAvailable();
 }
 
 qint64 QSampleProcessor::readData(char *inData, qint64 inMaxLen)
 {
-    return 0;
+    memcpy(inData, buffer.data(), 1024);
+
+    return 1024;
 }
 
 qint64 QSampleProcessor::writeData(const char *inData, qint64 inLen)
 {
-    return 0;
+    memcpy(buffer.data(), inData, 1024);
+
+    return 1024;
 }
