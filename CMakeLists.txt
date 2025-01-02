@@ -19,6 +19,10 @@ qt_add_executable(appDAF
     data/QDataDevicesDAF.cpp
     sample_processor/QSampleProcessor.h
     sample_processor/QSampleProcessor.cpp
+    circular_iterator/circular_iterator.h
+    circular_iterator/private/circular_iterator_type.h
+    circular_iterator/private/circular_iterator_data.h
+    circular_iterator/private/circular_iterator_impl.h
     view/QViewI.h
     view/QViewI.cpp
     view/QViewDevicesI.h

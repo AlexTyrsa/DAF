@@ -1,9 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-#include "view/QViewI.h"
-#include "view/QViewDevicesI.h"
-
 #include "data/QDataDAF.h"
 
 #include "view/audio/QViewMediaDevices.h"
