@@ -5,13 +5,13 @@
 
 template<class citerator_t>
 class circular_iterator : public circular_iterator_type<citerator_t, circular_iterator<citerator_t>>,
-                          public circular_iterator_impl<circular_iterator_type<citerator_t, circular_iterator<citerator_t>>, typename citerator_t::iterator_category>
+                          public circular_iterator_impl<circular_iterator_type<citerator_t, circular_iterator<citerator_t>>, typename std::iterator_traits<citerator_t>::iterator_category>
 {
 public:
     using iterator_type     = typename circular_iterator_type<citerator_t, circular_iterator<citerator_t>>::iterator_type;
     using reference         = typename circular_iterator_type<citerator_t, circular_iterator<citerator_t>>::reference;
     using pointer           = typename circular_iterator_type<citerator_t, circular_iterator<citerator_t>>::pointer;
-    using iterator_category = typename circular_iterator_impl<circular_iterator_type<citerator_t, circular_iterator<citerator_t>>, typename citerator_t::iterator_category>::iterator_category;
+    using iterator_category = typename circular_iterator_impl<circular_iterator_type<citerator_t, circular_iterator<citerator_t>>, typename std::iterator_traits<citerator_t>::iterator_category>::iterator_category;
 
 public:
     circular_iterator<citerator_t>(const iterator_type& inBegin, const iterator_type& inEnd) : circular_iterator_impl<circular_iterator_type<citerator_t, circular_iterator<citerator_t>>, std::random_access_iterator_tag>(inBegin, inEnd, inBegin)

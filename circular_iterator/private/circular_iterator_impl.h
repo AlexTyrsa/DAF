@@ -33,8 +33,6 @@ public:
             this->mI = this->mB;
         }
 
-        this->mIsEnd = true;
-
         return static_cast<this_type&>(*this);
     }
 

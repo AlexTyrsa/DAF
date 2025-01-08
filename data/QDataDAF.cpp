@@ -4,7 +4,7 @@
 
 QDataDAF::QDataDAF(QObject *inParent) : QDataI(inParent), mDelaySamples(0)
 {
-    mIODevice = new QSampleProcessor(this);
+    mIODevice = new QSampleProcessor(sizeof(int16_t), this);
     mIODevice->open(QIODevice::ReadWrite);
     mInputs   = new QDataDevicesDAF(mIODevice, this);
     mOutputs  = new QDataDevicesDAF(mIODevice, this);
@@ -48,7 +48,7 @@ void QDataDAF::setDelaySamples(int inDelay)
     {
         mDelaySamples = inDelay;
 
-        emit delayChanged();
+        emit delayChanged(delaySamples());
     }
 }
 

@@ -27,7 +27,7 @@ public slots:
     virtual void setDelayMS(int inDelay) = 0;
 
 signals:
-    void delayChanged();
+    void delayChanged(int);
     void inputChanged(QDataDevicesI*);
     void outputChanged(QDataDevicesI*);
 
