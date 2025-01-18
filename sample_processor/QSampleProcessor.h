@@ -38,7 +38,7 @@ private:
 
 private:
     static const int cChunkSize = 4096;
-    static const int cChunkNum  = 1024;
+    static const int cChunkNum  = 1000;
     static const int cBuffSize = cChunkNum * cChunkSize;
     struct CChunkInfo;
 

@@ -6,6 +6,7 @@ QDataDAF::QDataDAF(QObject *inParent) : QDataI(inParent), mDelaySamples(0)
 {
     mIODevice = new QSampleProcessor(sizeof(int16_t), this);
     mIODevice->open(QIODevice::ReadWrite);
+
     mInputs   = new QDataDevicesDAF(mIODevice, this);
     mOutputs  = new QDataDevicesDAF(mIODevice, this);
 
@@ -16,10 +17,9 @@ QDataDAF::QDataDAF(QObject *inParent) : QDataI(inParent), mDelaySamples(0)
     selectedFormat.setChannelCount(1);
 
     mInputs->setSelectedFormat(selectedFormat);
-
-//    selectedFormat.setChannelCount(2);
-
     mOutputs->setSelectedFormat(selectedFormat);
+
+    connect(this, SIGNAL(delayChanged(int)), mIODevice, SLOT(setDelaySamples(int)));
 }
 
 int QDataDAF::delaySamples() const

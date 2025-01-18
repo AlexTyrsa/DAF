@@ -8,6 +8,8 @@ class circular_iterator : public circular_iterator_type<citerator_t, circular_it
                           public circular_iterator_impl<circular_iterator_type<citerator_t, circular_iterator<citerator_t>>, typename std::iterator_traits<citerator_t>::iterator_category>
 {
 public:
+    using value_type        = typename circular_iterator_type<citerator_t, circular_iterator<citerator_t>>::value_type;
+    using difference_type   = typename circular_iterator_type<citerator_t, circular_iterator<citerator_t>>::difference_type;
     using iterator_type     = typename circular_iterator_type<citerator_t, circular_iterator<citerator_t>>::iterator_type;
     using reference         = typename circular_iterator_type<citerator_t, circular_iterator<citerator_t>>::reference;
     using pointer           = typename circular_iterator_type<citerator_t, circular_iterator<citerator_t>>::pointer;
@@ -61,6 +63,11 @@ public:
     pointer operator->() const
     {
         return this->mI.operator->();
+    }
+
+    difference_type circle() const
+    {
+        return this->mIsEnd;
     }
 
 };
