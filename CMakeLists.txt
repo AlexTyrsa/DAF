@@ -13,6 +13,8 @@ qt_add_executable(appDAF
     data/QDataI.cpp
     data/QDataDevicesI.h
     data/QDataDevicesI.cpp
+    data/private/QAudioDeviceWrap.h
+    data/private/QAudioDeviceWrap.cpp
     data/QDataDAF.h
     data/QDataDAF.cpp
     data/QDataDevicesDAF.h
@@ -43,6 +45,8 @@ qt_add_qml_module(appDAF
     QML_FILES main.qml
               view/QCViewItem.qml
               view/QCViewDevicesItem.qml
+              view/qml/QCViewMain.qml
+              view/qml/QCViewDevices.qml
 )
 
 set_target_properties(appDAF PROPERTIES

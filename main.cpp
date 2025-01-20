@@ -26,8 +26,9 @@ int main(int argc, char *argv[])
 
     data->setDelayMS(1000);
 
-    qmlRegisterUncreatableType<QViewI>("QDAFLib", 1, 0, "QViewI", "interface");
-    qmlRegisterUncreatableType<QViewDevicesI>("QDAFLib", 1, 0, "QViewDevicesI", "interface");
+    qmlRegisterUncreatableType<QDataI>("QDAFLib", 1, 0, "QDataI", "interface");
+    qmlRegisterUncreatableType<QDataDevicesI>("QDAFLib", 1, 0, "QDataDevicesI", "interface");
+    qmlRegisterSingletonInstance("QDAFLib", 1, 0, "DAFData", data.get());
 
     QQmlApplicationEngine engine;
     engine.load(QUrl("qrc:/DAF/main.qml"));

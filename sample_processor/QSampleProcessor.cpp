@@ -108,7 +108,6 @@ void QSampleProcessor::remapBuffer()
     int outIdx = 0;
     CBuffer::iterator bufI;
 
-    //204800
     for(bufI = mBuffer.begin() + mDelaySamples * mBytesPerSample; bufI < mBuffer.end(); bufI += cChunkSize, ++outIdx)
         mOutputMap[outIdx] = {bufI, bufI + cChunkSize, mDelaySamples + (outIdx * cChunkSize) / mBytesPerSample};
 

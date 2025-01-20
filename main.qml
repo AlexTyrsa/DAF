@@ -1,17 +1,19 @@
 import QtQuick
-
-import "./view"
+import QDAFLib 1.0
+import "./view/qml"
 
 Window
 {
-    width: 640
-    height: 480
+    width: 500
+    height: 200
     visible: true
     title: qsTr("DAF")
 
-//    QCViewItem
-    Item
+    QCViewMain
     {
+        viewData: DAFData
+
         anchors.fill: parent
+        anchors.margins: 15
     }
 }

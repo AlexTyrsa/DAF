@@ -5,22 +5,22 @@ QDataDevicesI::QDataDevicesI(QObject *inParent)
 
 }
 
-QQmlListProperty<const QAudioDevice> QDataDevicesI::devicesList()
+QQmlListProperty<QAudioDeviceWrap> QDataDevicesI::devicesList()
 {
-    return QQmlListProperty<const QAudioDevice>(this, this, &QDataDevicesI::itemsCount, &QDataDevicesI::itemAt);
+    return QQmlListProperty<QAudioDeviceWrap>(this, this, &QDataDevicesI::itemsCount, &QDataDevicesI::itemAt);
 }
 
-qsizetype QDataDevicesI::itemsCount(QQmlListProperty<const QAudioDevice> *inProperty)
+qsizetype QDataDevicesI::itemsCount(QQmlListProperty<QAudioDeviceWrap> *inProperty)
 {
     return reinterpret_cast<QDataDevicesI*>(inProperty->data)->devices().size();
 }
 
-const QAudioDevice* QDataDevicesI::itemAt(QQmlListProperty<const QAudioDevice> *inProperty, qsizetype inIndex)
+QAudioDeviceWrap* QDataDevicesI::itemAt(QQmlListProperty<QAudioDeviceWrap> *inProperty, qsizetype inIndex)
 {
     QDataDevicesI* _this = reinterpret_cast<QDataDevicesI*>(inProperty->data);
 
     if(inIndex >= 0 && inIndex < _this->devices().size())
-        return &(_this->devices()[inIndex]);
+        return new QAudioDeviceWrap(_this->devices()[inIndex]);
     else
         return nullptr;
 }

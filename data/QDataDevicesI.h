@@ -1,5 +1,7 @@
 #pragma once
 
+#include "private/QAudioDeviceWrap.h"
+
 #include <QObject>
 #include <QAudioDevice>
 #include <QAudioFormat>
@@ -12,7 +14,7 @@ class QDataDevicesI: public QObject
     Q_OBJECT
 
 public:
-    Q_PROPERTY(QQmlListProperty<const QAudioDevice> devices READ devicesList NOTIFY devicesChanged)
+    Q_PROPERTY(QQmlListProperty<QAudioDeviceWrap> devices READ devicesList NOTIFY devicesChanged)
 
     Q_PROPERTY(QAudioDevice selectedDevice READ selectedDevice NOTIFY selectedDeviceChanged)
     Q_PROPERTY(QAudioDevice defaultDevice READ defaultDevice NOTIFY defaultDeviceChanged)
@@ -42,10 +44,10 @@ signals:
     void devicesChanged();
 
 public:
-    QQmlListProperty<const QAudioDevice> devicesList();
+    QQmlListProperty<QAudioDeviceWrap> devicesList();
 
 private:
-    static qsizetype itemsCount(QQmlListProperty<const QAudioDevice>* inProperty);
-    static const QAudioDevice *itemAt(QQmlListProperty<const QAudioDevice>* inProperty, qsizetype inIndex);
+    static qsizetype itemsCount(QQmlListProperty<QAudioDeviceWrap>* inProperty);
+    static QAudioDeviceWrap *itemAt(QQmlListProperty<QAudioDeviceWrap>* inProperty, qsizetype inIndex);
 
 };

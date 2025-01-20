@@ -5,6 +5,6 @@ Item
 {
     id: root
 
-    property QViewDevicesI dafData
+    property QDataDevicesI viewData
 
 }
