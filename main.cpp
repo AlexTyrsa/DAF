@@ -24,8 +24,6 @@ int main(int argc, char *argv[])
     QScopedPointer<QViewPlayer> viewPlayer(new QViewPlayer());
     viewPlayer->setData(data->output());
 
-    data->setDelayMS(1000);
-
     qmlRegisterUncreatableType<QDataI>("QDAFLib", 1, 0, "QDataI", "interface");
     qmlRegisterUncreatableType<QDataDevicesI>("QDAFLib", 1, 0, "QDataDevicesI", "interface");
     qmlRegisterSingletonInstance("QDAFLib", 1, 0, "DAFData", data.get());

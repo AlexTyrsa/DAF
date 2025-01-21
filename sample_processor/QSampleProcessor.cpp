@@ -109,19 +109,19 @@ void QSampleProcessor::remapBuffer()
     CBuffer::iterator bufI;
 
     for(bufI = mBuffer.begin() + mDelaySamples * mBytesPerSample; bufI < mBuffer.end(); bufI += cChunkSize, ++outIdx)
-        mOutputMap[outIdx] = {bufI, bufI + cChunkSize, mDelaySamples + (outIdx * cChunkSize) / mBytesPerSample};
+        mOutputMap[outIdx] = {bufI, bufI + cChunkSize, mDelaySamples + (outIdx * cChunkSize) / mBytesPerSample + 1};
 
     bufI -= cChunkSize;
     --outIdx;
     int halfChunkSize = mBuffer.end() - bufI;
-    int sampleIdxInBuf = mDelaySamples + (outIdx * cChunkSize) / mBytesPerSample;
+    int sampleIdxInBuf = mDelaySamples + (outIdx * cChunkSize) / mBytesPerSample + 1;
 
     mOutputMap[outIdx++] = {bufI, mBuffer.end(), sampleIdxInBuf};
     sampleIdxInBuf += halfChunkSize / mBytesPerSample;
     mOutputMap[outIdx++] = {mBuffer.begin(), mBuffer.begin() + cChunkSize - halfChunkSize, sampleIdxInBuf};
 
     for(bufI = mBuffer.begin() + cChunkSize - halfChunkSize; bufI < mBuffer.begin() + mDelaySamples * mBytesPerSample; bufI += cChunkSize, ++outIdx)
-        mOutputMap[outIdx] = {bufI, bufI + cChunkSize, (outIdx * cChunkSize) / mBytesPerSample};
+        mOutputMap[outIdx] = {bufI, bufI + cChunkSize, (outIdx * cChunkSize) / mBytesPerSample + 1};
 
     mInputMapIterator  = circular_iterator<CBufferInfoI::iterator>(mInputMap.begin(), mInputMap.end());
     mOutputMapIterator = circular_iterator<CBufferInfoO::iterator>(mOutputMap.begin(), mOutputMap.end());

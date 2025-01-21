@@ -6,7 +6,12 @@ Window
 {
     width: 500
     height: 200
+
+    minimumWidth: 500
+    minimumHeight: 200
+
     visible: true
+
     title: qsTr("DAF")
 
     QCViewMain

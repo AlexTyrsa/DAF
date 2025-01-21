@@ -15,6 +15,9 @@ public:
     int delaySamples() const override;
     int delayMS() const override;
 
+    int delaySamplesMAX() const override;
+    int delayMSMAX() const override;
+
     QDataDevicesI* input() const override;
     QDataDevicesI* output() const override;
 

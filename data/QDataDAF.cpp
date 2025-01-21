@@ -32,6 +32,16 @@ int QDataDAF::delayMS() const
     return input()->selectedFormat().durationForFrames(delaySamples()) / 1000;
 }
 
+int QDataDAF::delaySamplesMAX() const
+{
+    return input()->selectedFormat().sampleRate() * 2;
+}
+
+int QDataDAF::delayMSMAX() const
+{
+    return input()->selectedFormat().durationForFrames(delaySamplesMAX()) / 1000;
+}
+
 QDataDevicesI *QDataDAF::input() const
 {
     return mInputs;
