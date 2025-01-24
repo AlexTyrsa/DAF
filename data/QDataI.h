@@ -13,6 +13,7 @@ public:
     Q_PROPERTY(int delaySamplesMAX READ delaySamplesMAX CONSTANT)
     Q_PROPERTY(int delayMSMAX READ delayMSMAX CONSTANT)
 
+    Q_PROPERTY(bool pause READ pause WRITE setPause NOTIFY pauseChanged)
 
     Q_PROPERTY(QDataDevicesI* input READ input NOTIFY inputChanged)
     Q_PROPERTY(QDataDevicesI* output READ output NOTIFY outputChanged)
@@ -26,15 +27,19 @@ public:
     virtual int delaySamplesMAX() const = 0;
     virtual int delayMSMAX() const = 0;
 
+    virtual bool pause() const = 0;
+
     virtual QDataDevicesI* input() const = 0;
     virtual QDataDevicesI* output() const = 0;
 
 public slots:
     virtual void setDelaySamples(int inDelay) = 0;
     virtual void setDelayMS(int inDelay) = 0;
+    virtual void setPause(bool inPause) = 0;
 
 signals:
     void delayChanged(int);
+    void pauseChanged(bool);
     void inputChanged(QDataDevicesI*);
     void outputChanged(QDataDevicesI*);
 

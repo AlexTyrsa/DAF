@@ -18,15 +18,17 @@ public:
     int delaySamplesMAX() const override;
     int delayMSMAX() const override;
 
+    bool pause() const override;
+
     QDataDevicesI* input() const override;
     QDataDevicesI* output() const override;
 
 public slots:
     void setDelaySamples(int inDelay) override;
     void setDelayMS(int inDelay) override;
+    void setPause(bool inPause) override;
 
 private:
-    int               mDelaySamples;
     QSampleProcessor* mIODevice;
     QDataDevicesI*    mInputs;
     QDataDevicesI*    mOutputs;

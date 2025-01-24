@@ -1,6 +1,6 @@
 #include "QSampleProcessor.h"
 
-QSampleProcessor::QSampleProcessor(int inBytesPerSample, QObject *inParent) : QIODevice(inParent), mDelaySamples(0), mBytesPerSample(inBytesPerSample)
+QSampleProcessor::QSampleProcessor(int inBytesPerSample, QObject *inParent) : QIODevice(inParent), mDelaySamples(0), mBytesPerSample(inBytesPerSample), mPause(false)
 {
     int outIdx = 0;
 
@@ -23,6 +23,11 @@ int QSampleProcessor::delaySamples() const
 int QSampleProcessor::bytesPerSample() const
 {
     return mBytesPerSample;
+}
+
+bool QSampleProcessor::pause() const
+{
+    return mPause;
 }
 
 void QSampleProcessor::setDelaySamples(int inDelay)
@@ -49,6 +54,18 @@ void QSampleProcessor::setBytesPerSample(int inBytesPerSample)
     }
 }
 
+void QSampleProcessor::setPause(bool inPause)
+{
+    if(inPause != pause())
+    {
+        mPause = inPause;
+
+        mBuffer.fill(0);
+
+        emit pauseChanged(pause());
+    }
+}
+
 qint64 QSampleProcessor::readData(char *inData, qint64 inMaxLen)
 {
     qint64 writeLen = 0;
@@ -65,7 +82,8 @@ qint64 QSampleProcessor::readData(char *inData, qint64 inMaxLen)
 
         if(chunkLen >= 0 && writeLen + chunkLen <= inMaxLen && inputSamples - outputSamples >= delaySamples())
         {
-            std::copy(outputChunk.chunkBegin, outputChunk.chunkEnd, inData + writeLen);
+            if(!pause())
+                std::copy(outputChunk.chunkBegin, outputChunk.chunkEnd, inData + writeLen);
 
             writeLen += chunkLen;
             ++mOutputMapIterator;

@@ -2,7 +2,7 @@
 
 #include "QDataDevicesDAF.h"
 
-QDataDAF::QDataDAF(QObject *inParent) : QDataI(inParent), mDelaySamples(0)
+QDataDAF::QDataDAF(QObject *inParent) : QDataI(inParent)
 {
     mIODevice = new QSampleProcessor(sizeof(int16_t), this);
     mIODevice->open(QIODevice::ReadWrite);
@@ -19,12 +19,13 @@ QDataDAF::QDataDAF(QObject *inParent) : QDataI(inParent), mDelaySamples(0)
     mInputs->setSelectedFormat(selectedFormat);
     mOutputs->setSelectedFormat(selectedFormat);
 
-    connect(this, SIGNAL(delayChanged(int)), mIODevice, SLOT(setDelaySamples(int)));
+    connect(mIODevice, SIGNAL(delaySamplesChanged(int)), this, SIGNAL(delayChanged(int)));
+    connect(mIODevice, SIGNAL(pauseChanged(bool)), this, SIGNAL(pauseChanged(bool)));
 }
 
 int QDataDAF::delaySamples() const
 {
-    return mDelaySamples;
+    return mIODevice->delaySamples();
 }
 
 int QDataDAF::delayMS() const
@@ -42,6 +43,11 @@ int QDataDAF::delayMSMAX() const
     return input()->selectedFormat().durationForFrames(delaySamplesMAX()) / 1000;
 }
 
+bool QDataDAF::pause() const
+{
+    return mIODevice->pause();
+}
+
 QDataDevicesI *QDataDAF::input() const
 {
     return mInputs;
@@ -54,12 +60,7 @@ QDataDevicesI *QDataDAF::output() const
 
 void QDataDAF::setDelaySamples(int inDelay)
 {
-    if(inDelay != delaySamples())
-    {
-        mDelaySamples = inDelay;
-
-        emit delayChanged(delaySamples());
-    }
+    mIODevice->setDelaySamples(inDelay);
 }
 
 void QDataDAF::setDelayMS(int inDelay)
@@ -67,4 +68,9 @@ void QDataDAF::setDelayMS(int inDelay)
     int delaySamples = input()->selectedFormat().framesForDuration(inDelay * 1000) / input()->selectedFormat().channelCount();
 
     setDelaySamples(delaySamples);
+}
+
+void QDataDAF::setPause(bool inPause)
+{
+    mIODevice->setPause(inPause);
 }

@@ -12,6 +12,7 @@ class QSampleProcessor : public QIODevice
 public:
     Q_PROPERTY(int delaySamples READ delaySamples WRITE setDelaySamples NOTIFY delaySamplesChanged)
     Q_PROPERTY(int bytesPerSample READ bytesPerSample WRITE setBytesPerSample NOTIFY bytesPerSampleChanged)
+    Q_PROPERTY(bool pause READ pause WRITE setPause NOTIFY pauseChanged)
 
 public:
     QSampleProcessor(int inBytesPerSample, QObject* inParent = nullptr);
@@ -20,14 +21,17 @@ public:
 
     int delaySamples() const;
     int bytesPerSample() const;
+    bool pause() const;
 
 public slots:
     void setDelaySamples(int inDelay);
     void setBytesPerSample(int inBytesPerSample);
+    void setPause(bool inPause);
 
 signals:
     void delaySamplesChanged(int);
     void bytesPerSampleChanged(int);
+    void pauseChanged(bool);
 
 protected:
     qint64 readData(char *inData, qint64 inMaxLen) override;
@@ -63,5 +67,6 @@ private:
 
     int mDelaySamples;
     int mBytesPerSample;
+    bool mPause;
 
 };

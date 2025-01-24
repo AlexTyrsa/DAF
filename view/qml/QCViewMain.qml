@@ -48,7 +48,7 @@ QCViewItem
             {
                 anchors.fill: parent
 
-                spacing: 10
+                spacing: 15
 
                 Item
                 {
@@ -64,6 +64,26 @@ QCViewItem
                         verticalAlignment: Text.AlignVCenter
 
                         text: viewData.delayMS + qsTr(" ms")
+                    }
+                }
+
+                Item
+                {
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+
+                    RoundButton
+                    {
+                        anchors.centerIn: parent
+
+                        width: 20
+                        height: 20
+
+                        text: viewData.pause ? "\u25b6" : "\u23f8"
+                        onClicked:
+                        {
+                            viewData.pause = !viewData.pause;
+                        }
                     }
                 }
 
