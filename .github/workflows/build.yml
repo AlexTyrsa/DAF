@@ -53,10 +53,13 @@ jobs:
       run: ctest -C ${{env.BUILD_TYPE}}
 
     - name: Deploy app
-      run: windeployqt ${{github.workspace}}/build/Release
+      run: |
+            mkdir bin
+            move Release/*.exe bin
+            windeployqt bin --compiler-runtime
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: appDAF
-        path: ${{github.workspace}}/build/Release
+        path: bin
