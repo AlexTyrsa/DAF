@@ -53,6 +53,7 @@ jobs:
       run: ctest -C ${{env.BUILD_TYPE}}
 
     - name: Deploy app
+      working-directory: ${{github.workspace}}/build
       run: |
             mkdir bin
             move Release/*.exe bin
@@ -62,4 +63,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: appDAF
-        path: bin
+        path: build/bin
