@@ -57,7 +57,7 @@ jobs:
       run: |
             mkdir bin
             move Release/*.exe bin
-            windeployqt bin --compiler-runtime
+            windeployqt bin --qmldir=${{github.workspace}} --compiler-runtime
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
